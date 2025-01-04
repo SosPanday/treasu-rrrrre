@@ -11,5 +11,21 @@ config_version=5
 [application]
 
 config/name="Treasu'rrrrre"
+config/version="0"
+run/main_scene="res://scenes/basic_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=216
+window/size/window_width_override=768
+window/size/window_height_override=432
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[rendering]
+
+2d/snap/snap_2d_transforms_to_pixel=true
