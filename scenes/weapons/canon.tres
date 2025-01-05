@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cx0m6uovqcnmn"]
+
+[ext_resource type="PackedScene" uid="uid://d138uyy7ewi7w" path="res://scenes/projectile/projectile.tscn" id="1_kgarv"]
+[ext_resource type="Script" path="res://scenes/weapons/weapons.gd" id="2_xtroj"]
+
+[resource]
+script = ExtResource("2_xtroj")
+cooldown = 0.4
+projectile_scene = ExtResource("1_kgarv")
+projectile_speed = 300.0
+num_projectiles = 1
+spread_angle = 15.0

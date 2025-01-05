@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqm7ex2l1siqo"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_ship.gd" id="1_fc21y"]
+[ext_resource type="Texture2D" uid="uid://c0a3pwrtenx0e" path="res://sprites/Ghost_front_.png" id="2_814ql"]
+[ext_resource type="Resource" uid="uid://bc65n422p0yvx" path="res://scenes/enemies/resource/ghost_enemy.tres" id="2_xa14t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7af1k"]
+radius = 24.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3fg4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_814ql")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jy0b4"]
+radius = 32.0
+
+[node name="Ghost" type="CharacterBody2D" groups=["enemies"]]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_fc21y")
+enemy_data = ExtResource("2_xa14t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
+shape = SubResource("CircleShape2D_7af1k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemies"]]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_x3fg4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jy0b4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

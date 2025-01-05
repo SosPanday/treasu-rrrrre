@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://0bsvd3iurqsa"]
+
+[ext_resource type="PackedScene" uid="uid://ct0rtde082fpp" path="res://scenes/enemies/enemy_ship.tscn" id="1_ef2hs"]
+[ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="1_yoyq7"]
+[ext_resource type="Resource" uid="uid://28iip3ie4q8e" path="res://scenes/weapons/shotcanon.tres" id="2_ciseb"]
+[ext_resource type="Texture2D" uid="uid://cbwv2mo55y3ic" path="res://sprites/Ship_down_32px.png" id="4_jm6sq"]
+[ext_resource type="Texture2D" uid="uid://e1gdxgxj2bwm" path="res://sprites/Ship_right _32px.png" id="5_m5yb7"]
+[ext_resource type="Texture2D" uid="uid://4lb8fxoraws0" path="res://sprites/Ship_up_32px.png" id="6_gysmr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bek5k"]
+radius = 32.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7fjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jm6sq")
+}],
+"loop": true,
+"name": &"anim_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_m5yb7")
+}],
+"loop": true,
+"name": &"anim_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gysmr")
+}],
+"loop": true,
+"name": &"anim_up",
+"speed": 5.0
+}]
+
+[node name="basic_scene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugText" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+text = "Hi"
+
+[node name="HeatlhText" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 55.0
+text = "Hi"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="EnemyShip" parent="." instance=ExtResource("1_ef2hs")]
+position = Vector2(-336, 0)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+z_index = 1
+texture_filter = 1
+motion_mode = 1
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_yoyq7")
+weapon = ExtResource("2_ciseb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_bek5k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_f7fjj")
+animation = &"anim_up"
+
+[node name="Timer" type="Timer" parent="Player"]
+
+[connection signal="timeout" from="Player/Timer" to="EnemyShip" method="_on_timer_timeout"]

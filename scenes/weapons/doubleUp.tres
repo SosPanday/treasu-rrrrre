@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dc5ss5pibtudx"]
+
+[ext_resource type="PackedScene" uid="uid://d138uyy7ewi7w" path="res://scenes/projectile/projectile.tscn" id="1_0sei5"]
+[ext_resource type="Script" path="res://scenes/weapons/weapons.gd" id="2_jn83u"]
+
+[resource]
+script = ExtResource("2_jn83u")
+cooldown = 0.5
+projectile_scene = ExtResource("1_0sei5")
+projectile_speed = 350.0
+num_projectiles = 3
+spread_angle = 25.0

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://tvnjqixsk2ug"]
+
+[ext_resource type="Script" path="res://scenes/enemies/resource/EnemyResource.gd" id="1_t7ave"]
+[ext_resource type="Texture2D" uid="uid://c3m2700b1i2tx" path="res://sprites/enemy_ship/Ship_Wreck.png" id="2_114g4"]
+[ext_resource type="Texture2D" uid="uid://xx2hw372y5s3" path="res://sprites/enemy_ship/Ship_Enemy_right_32px.png" id="2_a5b6u"]
+[ext_resource type="Texture2D" uid="uid://bivy7c0qi3u2e" path="res://sprites/enemy_ship/Ship_Enemy_down_32px.png" id="3_ap2on"]
+[ext_resource type="Texture2D" uid="uid://cq3bru8q28vc0" path="res://sprites/enemy_ship/Ship_Enemy_up_32px.png" id="5_pufa0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_avjh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ap2on")
+}],
+"loop": true,
+"name": &"anim_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a5b6u")
+}],
+"loop": true,
+"name": &"anim_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pufa0")
+}],
+"loop": true,
+"name": &"anim_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_114g4")
+}],
+"loop": true,
+"name": &"broken",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_t7ave")
+sprite = SubResource("SpriteFrames_avjh1")
+health = 5
+speed = 100.0
+can_pass_through_walls = false
+has_death_state = true
+respawn_time = 4.0

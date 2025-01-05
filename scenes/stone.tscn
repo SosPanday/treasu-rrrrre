@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwr68bj6unm8k"]
+
+[ext_resource type="Texture2D" uid="uid://bcb8ujqc3i5ig" path="res://sprites/Stone_2.png" id="1_uyxdg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y24k0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q25qv"]
+radius = 14.0
+
+[node name="Stone" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_y24k0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 1.9913)
+shape = SubResource("CircleShape2D_q25qv")
+
+[node name="Stone2" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_uyxdg")
