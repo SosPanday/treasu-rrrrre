@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Bewegungskonstanten
-const SPEED = 100.0
+const SPEED = 130.0
 const ACCELERATION = 1500.0
 const FRICTION = 2000.0
 var health = 5.0
@@ -15,12 +15,29 @@ var is_invincible: bool = false  # Ob der Spieler momentan in I-Frames ist
 var can_shoot: bool = true  # Cooldown-Management
 
 @onready var sprite = $AnimatedSprite2D
-@onready var debug_text = $"../CanvasLayer/DebugText"
-@onready var health_text = $"../CanvasLayer/HeatlhText"
+#@onready var debug_text = $"../CanvasLayer/DebugText"
+#@onready var health_text = $"../CanvasLayer/HeatlhText"
+@onready var health_ui = $"../CanvasLayer/HeartContainers"
+
+@export var default_weapon: Resource  # Aktuelle Waffe
+var weapon_reset_timer: Timer
+
+func _ready():
+	weapon = default_weapon
+	weapon_reset_timer = Timer.new()
+	weapon_reset_timer.timeout.connect(_reset_weapon)
+	add_child(weapon_reset_timer)
+
+func set_temporary_weapon(new_weapon: Resource, duration: float):
+	weapon = new_weapon
+	weapon_reset_timer.start(duration)
+
+func _reset_weapon():
+	weapon = default_weapon
 
 func _physics_process(delta):
 	# Debug-Text aktualisieren (falls vorhanden)
-	update_debug_text()
+	#update_debug_text()
 	
 	# Bewegung
 	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -56,12 +73,12 @@ func stop_animation() -> void:
 	if sprite:
 		sprite.stop()
 
-func update_debug_text() -> void:
-	if debug_text != null:
-		debug_text.text = "Speed: " + str(velocity.length())
-		health_text.text = "Health:" + str(health)
-	else:
-		print("Debug text node is not properly initialized!")
+#func update_debug_text() -> void:
+	#if debug_text != null:
+		#debug_text.text = "Speed: " + str(velocity.length())
+		#health_text.text = "Health:" + str(health)
+	#else:
+		#print("Debug text node is not properly initialized!")
 
 func shoot(direction: Vector2) -> void:
 	if weapon and weapon.projectile_scene:
@@ -86,13 +103,22 @@ func get_shoot_direction() -> Vector2:
 	# Eingaben der Schieß-Tasten auslesen (Pfeiltasten)
 	var shoot_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	return shoot_direction.normalized()
+	
+	
+func on_hit(amount: int):
+	take_damage(amount)
 
 func take_damage(amount: int):
+
 	if not is_invincible:
 		health -= amount  # Schaden hinzufügen
+		# Im Charakter-Skript
+		health_ui.update_hearts(health)
 		if health <= 0:
 			die()  # Spieler stirbt, wenn die Lebenspunkte auf 0 sind
 
+
+			
 func start_invincibility(duration: float):
 	is_invincible = true  # Setze den Spieler in den I-Frames Zustand
 	invincibility_timer.start(duration)  # Starte den Timer mit der Dauer der I-Frames
@@ -105,4 +131,5 @@ func _on_invincibility_timeout():
 
 func die():
 	# Der Spieler stirbt, wenn die Lebenspunkte auf 0 gehen
-	queue_free()  # Zerstöre den Spieler (oder führe einen GameOver-Prozess aus)
+	print("DIE DIE DIE DIE DIE DIE")
+	get_tree().change_scene_to_file("res://scenes/stone.tscn")

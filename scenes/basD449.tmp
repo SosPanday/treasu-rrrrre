@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://0bsvd3iurqsa"]
+[gd_scene load_steps=18 format=4 uid="uid://0bsvd3iurqsa"]
 
 [ext_resource type="Texture2D" uid="uid://c7idcflbjqixw" path="res://sprites/UI__Heart_16px.png" id="1_a7pdf"]
 [ext_resource type="PackedScene" uid="uid://ct0rtde082fpp" path="res://scenes/enemies/enemy_ship.tscn" id="1_ef2hs"]
@@ -11,10 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://btt3lihd5d3cd" path="res://sprites/Ship_up_32px.png" id="6_gysmr"]
 [ext_resource type="Resource" uid="uid://cx0m6uovqcnmn" path="res://scenes/weapons/canon.tres" id="6_yk78h"]
 [ext_resource type="PackedScene" uid="uid://dwr68bj6unm8k" path="res://scenes/stone.tscn" id="8_mjnhm"]
-[ext_resource type="PackedScene" uid="uid://cj5rb8o7wjggk" path="res://scenes/EnemySpawner.tscn" id="9_dl3hb"]
 [ext_resource type="Texture2D" uid="uid://oqwuud4qlxqk" path="res://sprites/Water_1.png" id="9_u6b36"]
 [ext_resource type="PackedScene" uid="uid://6pmba5w1w05" path="res://scenes/pickups/pickup.tscn" id="12_ymu1i"]
-[ext_resource type="PackedScene" uid="uid://fcu8pn2eubbo" path="res://scenes/projectile/projectileEnemy.tscn" id="13_wio68"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eeugj"]
 radius = 18.57
@@ -62,10 +60,11 @@ texture_filter = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DebugText" type="Label" parent="CanvasLayer"]
-offset_left = 48.0
-offset_top = 32.0
-offset_right = 88.0
-offset_bottom = 55.0
+visible = false
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
 text = "Hi"
 metadata/_edit_use_anchors_ = true
 
@@ -156,12 +155,6 @@ position = Vector2(192, -96)
 
 [node name="Stone5" parent="." instance=ExtResource("8_mjnhm")]
 position = Vector2(-224, -128)
-
-[node name="EnemySpawner" parent="." instance=ExtResource("9_dl3hb")]
-position = Vector2(-512, -320)
-enemy_scene = ExtResource("13_wio68")
-enemies_per_wave = 2
-spawn_offset = 100.0
 
 [node name="Pickup" parent="." instance=ExtResource("12_ymu1i")]
 position = Vector2(-128, 0)

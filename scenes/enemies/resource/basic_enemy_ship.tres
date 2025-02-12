@@ -1,9 +1,10 @@
-[gd_resource type="Resource" load_steps=7 format=3 uid="uid://tvnjqixsk2ug"]
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://tvnjqixsk2ug"]
 
 [ext_resource type="Script" path="res://scenes/enemies/resource/EnemyResource.gd" id="1_t7ave"]
 [ext_resource type="Texture2D" uid="uid://c3m2700b1i2tx" path="res://sprites/enemy_ship/Ship_Wreck.png" id="2_114g4"]
 [ext_resource type="Texture2D" uid="uid://xx2hw372y5s3" path="res://sprites/enemy_ship/Ship_Enemy_right_32px.png" id="2_a5b6u"]
 [ext_resource type="Texture2D" uid="uid://bivy7c0qi3u2e" path="res://sprites/enemy_ship/Ship_Enemy_down_32px.png" id="3_ap2on"]
+[ext_resource type="Texture2D" uid="uid://dgbf3fwsjslqw" path="res://sprites/enemy_ship.png" id="5_5g110"]
 [ext_resource type="Texture2D" uid="uid://cq3bru8q28vc0" path="res://sprites/enemy_ship/Ship_Enemy_up_32px.png" id="5_pufa0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_avjh1"]
@@ -33,6 +34,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 5.0,
+"texture": ExtResource("5_5g110")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 3.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_114g4")
 }],
@@ -45,7 +54,12 @@ animations = [{
 script = ExtResource("1_t7ave")
 sprite = SubResource("SpriteFrames_avjh1")
 health = 5
-speed = 100.0
+speed = 90.0
+default_speed = 90.0
 can_pass_through_walls = false
 has_death_state = true
 respawn_time = 4.0
+attack_range = 50.0
+attack_animation = "attack"
+attack_cooldown = 1.5
+attack_damage = 1

@@ -3,6 +3,7 @@ extends Node2D  # Root-Knoten bleibt Node2D
 @export var speed: float = 400.0
 @export var lifetime: float = 1.5  # Lebensdauer des Projektils
 @export var damage: float = 1.0 # Schaden des Projektils 
+@export var damagingType: String = "enemies"
 var direction: Vector2 = Vector2.ZERO  # Richtung des Projektils
 
 func _ready():
@@ -16,6 +17,6 @@ func _physics_process(delta):
 	position += direction * speed * delta
 
 func _on_body_entered(body):
-	if body.is_in_group("enemies"):  # Prüfen, ob der getroffene Körper ein Gegner ist
+	if body.is_in_group(damagingType):  # Prüfen, ob der getroffene Körper ein Gegner ist
 		body.on_hit(damage)  # Schaden dem Gegner zufügen
 		queue_free()  # Projektil zerstören

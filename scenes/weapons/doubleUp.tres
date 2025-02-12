@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_jn83u")
-cooldown = 0.5
+cooldown = 0.05
 projectile_scene = ExtResource("1_0sei5")
 projectile_speed = 350.0
-num_projectiles = 3
-spread_angle = 25.0
+num_projectiles = 9
+spread_angle = 40.0
